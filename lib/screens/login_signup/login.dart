@@ -4,18 +4,17 @@ import 'package:bancvest_app/screens/home/home_screen.dart';
 import 'package:bancvest_app/screens/login_signup/signup.dart';
 import 'package:bancvest_app/widgets/common/custom_button.dart';
 import 'package:bancvest_app/widgets/common/custom_text_field.dart';
-import 'package:bancvest_app/widgets/dashboard.dart';
 import 'package:flutter/material.dart';
 
 final emailController = TextEditingController();
 final passwordController = TextEditingController();
+final formKey = GlobalKey<FormState>();
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -77,7 +76,8 @@ class LoginScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const HomePage()),
+                          builder: (context) => const HomePage(),
+                        ),
                       );
                     },
                     label: 'Login',
@@ -90,13 +90,7 @@ class LoginScreen extends StatelessWidget {
                     height: 20,
                   ),
                   GestureDetector(
-                    onTap: (() {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomePage()),
-                      );
-                    }),
+                    onTap: () {},
                     child: Text(
                       'Forgot Password?',
                       style: CustomTextStyles.dashboardGenericStyle
@@ -114,13 +108,13 @@ class LoginScreen extends StatelessWidget {
                         style: CustomTextStyles.dashboardGenericStyle,
                       ),
                       GestureDetector(
-                        onTap: (() {
+                        onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const SignUpScreen()),
                           );
-                        }),
+                        },
                         child: Text(
                           'Sign Up',
                           style: CustomTextStyles.dashboardGenericStyle

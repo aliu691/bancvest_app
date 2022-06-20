@@ -22,7 +22,7 @@ class CustomTextField extends StatefulWidget {
   bool obscureText = false;
   final Icon? prefixIcon;
   final Icon? suffixIcon;
-  final String label;
+  final String? label;
   final FormFieldValidator<String?> validator;
   final String hintText;
   final TextStyle? hintTextStyle;
@@ -35,7 +35,7 @@ class CustomTextField extends StatefulWidget {
     required this.obscureText,
     this.prefixIcon,
     this.suffixIcon,
-    required this.label,
+    this.label,
     required this.validator,
     required this.hintText,
     this.hintTextStyle,
@@ -54,12 +54,16 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.label,
-          style: CustomTextStyles.dashboardGenericStyle.copyWith(
-            fontSize: 20,
-          ),
-        ),
+        widget.label != null
+            ? Text(
+                widget.label!,
+                style: CustomTextStyles.dashboardGenericStyle.copyWith(
+                  fontSize: 20,
+                ),
+              )
+            : const SizedBox(
+                height: 10,
+              ),
         const SizedBox(
           height: 20,
         ),

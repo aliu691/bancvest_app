@@ -39,9 +39,7 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: Container(
-        child: UserDashBoard(),
-      ),
+      body: const UserDashBoard(),
     );
   }
 }

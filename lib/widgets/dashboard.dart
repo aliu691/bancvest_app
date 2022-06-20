@@ -76,14 +76,14 @@ class UserDashBoard extends StatelessWidget {
                 action: () {},
                 label: 'Transfer',
                 labelStyle: CustomTextStyles.dashboardGenericStyle
-                    .copyWith(color: CustomColors.textWHite),
+                    .copyWith(color: CustomColors.textWhite),
               ),
               CustomButton(
                 action: () {},
                 label: 'Deposit',
                 labelStyle: CustomTextStyles.dashboardGenericStyle
                     .copyWith(color: CustomColors.customGreen),
-                background: CustomColors.textWHite,
+                background: CustomColors.textWhite,
               )
             ],
           ),

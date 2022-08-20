@@ -1,5 +1,6 @@
 import 'package:bancvest_app/constants/colors.dart';
 import 'package:bancvest_app/constants/text_style.dart';
+import 'package:bancvest_app/helpers/input_validator.dart';
 import 'package:bancvest_app/screens/home/home_screen.dart';
 import 'package:bancvest_app/widgets/common/custom_button.dart';
 import 'package:bancvest_app/widgets/common/custom_text_field.dart';
@@ -43,12 +44,7 @@ class SignUpScreen extends StatelessWidget {
                 children: [
                   CustomTextField(
                     obscureText: false,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
+                    validator: InputValidator.nameValidator,
                     hintText: 'First Name',
                     onSaved: (value) {},
                     isPassword: false,
@@ -56,12 +52,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   CustomTextField(
                     obscureText: false,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
+                    validator: InputValidator.nameValidator,
                     hintText: 'Last Name',
                     onSaved: (value) {},
                     isPassword: false,
@@ -69,12 +60,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   CustomTextField(
                     obscureText: false,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
+                    validator: InputValidator.emailValidator,
                     hintText: 'Email',
                     onSaved: (value) {},
                     isPassword: false,
@@ -82,24 +68,17 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   CustomTextField(
                     obscureText: false,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
+                    validator: InputValidator.passwordValidator,
                     hintText: 'Password',
                     onSaved: (value) {},
                     isPassword: true,
                     textController: passwordController,
                   ),
                   CustomTextField(
-                    obscureText: false,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
+                    obscureText: true,
+                    validator: (v) {
+                      InputValidator.confirmPasswordValidator(
+                          v, passwordController.text);
                     },
                     hintText: 'Confirm Password',
                     onSaved: (value) {},

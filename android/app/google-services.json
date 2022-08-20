@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "839475981029",
+    "project_id": "bancvest-app",
+    "storage_bucket": "bancvest-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839475981029:android:c281de6b81c537d9b1820c",
+        "android_client_info": {
+          "package_name": "com.example.bancvest_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "839475981029-jd97v9rpun2jn6a4mqtcrp4idvrnif8o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlwL5-lXTirmJ_6ztJaZ2AYEiIdBEfQ6I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "839475981029-jd97v9rpun2jn6a4mqtcrp4idvrnif8o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

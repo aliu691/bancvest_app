@@ -76,10 +76,8 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   CustomTextField(
                     obscureText: true,
-                    validator: (v) {
-                      InputValidator.confirmPasswordValidator(
-                          v, passwordController.text);
-                    },
+                    validator: (v) => InputValidator.confirmPasswordValidator(
+                        v, passwordController.text),
                     hintText: 'Confirm Password',
                     onSaved: (value) {},
                     isPassword: true,

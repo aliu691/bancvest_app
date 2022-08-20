@@ -67,7 +67,7 @@ class SignUpScreen extends StatelessWidget {
                     textController: emailController,
                   ),
                   CustomTextField(
-                    obscureText: false,
+                    obscureText: true,
                     validator: InputValidator.passwordValidator,
                     hintText: 'Password',
                     onSaved: (value) {},

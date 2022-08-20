@@ -1,5 +1,3 @@
-import 'package:email_validator/email_validator.dart';
-
 class InputValidator {
   InputValidator._();
 
@@ -18,11 +16,12 @@ class InputValidator {
   }
 
   static String? emailValidator(String? value) {
-    if (value == null || value.isEmpty) {
+    if (value!.isEmpty) {
       return 'Please enter an email';
     }
-    if (EmailValidator.validate(value.trim())) {
-      return 'Please enter a valid email';
+
+    if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+      return "Please enter a valid email address";
     }
     return null;
   }

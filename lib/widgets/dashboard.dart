@@ -1,5 +1,7 @@
 import 'package:bancvest_app/constants/colors.dart';
 import 'package:bancvest_app/constants/text_style.dart';
+import 'package:bancvest_app/screens/login_signup/login.dart';
+import 'package:bancvest_app/services/firebase.dart';
 import 'package:bancvest_app/widgets/common/custom_button.dart';
 import 'package:bancvest_app/widgets/recent_activity.dart';
 import 'package:flutter/material.dart';
@@ -40,10 +42,22 @@ class UserDashBoard extends StatelessWidget {
                 'Account',
                 style: CustomTextStyles.dashboardGenericStyle,
               ),
-              Text(
-                'LogOut',
-                style: CustomTextStyles.dashboardGenericStyle
-                    .copyWith(color: CustomColors.customRed),
+              GestureDetector(
+                onTap: () {
+                  FirebaseService()
+                      .signOut()
+                      .then((uid) => Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginScreen(),
+                            ),
+                          ));
+                },
+                child: Text(
+                  'LogOut',
+                  style: CustomTextStyles.dashboardGenericStyle
+                      .copyWith(color: CustomColors.customRed),
+                ),
               )
             ],
           ),

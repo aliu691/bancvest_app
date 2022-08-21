@@ -37,11 +37,13 @@ dependencies:
 
   fluttertoast: ^8.0.9
   email_validator: ^2.1.17
+  json_serializable: ^6.3.1
 
   #firebase
   firebase_core: ^1.21.0
   firebase_auth: ^3.6.4
   cloud_firestore: ^3.4.5
+  build_runner: ^2.2.0
 
 dev_dependencies:
   flutter_test:

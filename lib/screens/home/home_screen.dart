@@ -1,6 +1,9 @@
 import 'package:bancvest_app/constants/colors.dart';
 import 'package:bancvest_app/constants/text_style.dart';
+import 'package:bancvest_app/models/user_model.dart';
 import 'package:bancvest_app/widgets/dashboard.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,6 +14,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  User? user = FirebaseAuth.instance.currentUser;
+
+  UserModel loggedInUser = UserModel();
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.uid)
+        .get()
+        .then((value) => loggedInUser = UserModel.fromMap(value.data()));
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +58,9 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: const UserDashBoard(),
+      body: UserDashBoard(
+        user: loggedInUser,
+      ),
     );
   }
 }

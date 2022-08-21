@@ -1,4 +1,6 @@
 import 'package:bancvest_app/constants/colors.dart';
+import 'package:bancvest_app/models/user_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -26,4 +28,13 @@ class FirebaseService {
   signOut() async {
     await FirebaseAuth.instance.signOut();
   }
+
+  // getLoggedInUser(){
+  //   User? user = FirebaseAuth.instance.currentUser;
+
+  //   UserModel loggedInUser = UserModel();
+
+  //   FirebaseFirestore.instance
+
+  // }
 }

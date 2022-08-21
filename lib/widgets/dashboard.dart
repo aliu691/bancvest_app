@@ -1,13 +1,19 @@
+import 'package:flutter/material.dart';
+
 import 'package:bancvest_app/constants/colors.dart';
 import 'package:bancvest_app/constants/text_style.dart';
+import 'package:bancvest_app/models/user_model.dart';
 import 'package:bancvest_app/screens/login_signup/login.dart';
 import 'package:bancvest_app/services/firebase.dart';
 import 'package:bancvest_app/widgets/common/custom_button.dart';
 import 'package:bancvest_app/widgets/recent_activity.dart';
-import 'package:flutter/material.dart';
 
 class UserDashBoard extends StatelessWidget {
-  const UserDashBoard({Key? key}) : super(key: key);
+  UserModel user = UserModel();
+  UserDashBoard({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +25,9 @@ class UserDashBoard extends StatelessWidget {
         children: [
           Center(
             child: Column(
-              children: const [
+              children: [
                 Text(
-                  'Nna Chebe',
+                  'Welcome ${user.firstName} ${user.lastName}',
                   style: CustomTextStyles.nameStyle,
                 ),
                 SizedBox(height: 10),

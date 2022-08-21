@@ -53,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     validator: InputValidator.emailValidator,
                     hintText: 'Enter your Email',
                     onSaved: (value) {
-                      emailController.text = value!;
+                      emailController.text = value!.trim();
                     },
                     isPassword: false,
                     textController: emailController,

@@ -12,6 +12,9 @@ class InputValidator {
     if (value == null || value.isEmpty) {
       return 'Please enter a Name';
     }
+    // if (value.length < 3) {
+    //   return 'Name must be at least 3 characters';
+    // }
     return null;
   }
 

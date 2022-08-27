@@ -1,5 +1,6 @@
 import 'package:bancvest_app/constants/colors.dart';
 import 'package:bancvest_app/constants/text_style.dart';
+import 'package:bancvest_app/helpers/input_validators.dart';
 import 'package:bancvest_app/screens/home/home_screen.dart';
 import 'package:bancvest_app/screens/login_signup/signup.dart';
 import 'package:bancvest_app/widgets/common/custom_button.dart';
@@ -40,12 +41,7 @@ class LoginScreen extends StatelessWidget {
                   CustomTextField(
                     obscureText: false,
                     label: 'Email',
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
+                    validator: InputValidator.emailValidator,
                     hintText: 'Enter your Email',
                     onSaved: (value) {},
                     isPassword: false,
@@ -57,12 +53,7 @@ class LoginScreen extends StatelessWidget {
                   CustomTextField(
                     obscureText: true,
                     label: 'Password',
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
+                    validator: InputValidator.textValidator,
                     hintText: 'Enter your password',
                     onSaved: (value) {},
                     isPassword: true,

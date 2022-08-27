@@ -1,7 +1,10 @@
+import 'package:bancvest_app/models/environment.dart';
 import 'package:bancvest_app/screens/login_signup/login.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: Environment.fileName);
   runApp(const MyApp());
 }
 

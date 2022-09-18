@@ -1,12 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+
 import 'package:bancvest_app/constants/colors.dart';
 import 'package:bancvest_app/constants/text_style.dart';
 import 'package:bancvest_app/widgets/common/custom_button.dart';
 import 'package:bancvest_app/widgets/recent_activity.dart';
-import 'package:flutter/material.dart';
 
-class UserDashBoard extends StatelessWidget {
-  const UserDashBoard({Key? key}) : super(key: key);
+class UserDashBoard extends StatefulWidget {
+  final User? user;
+  UserDashBoard({
+    Key? key,
+    this.user,
+  }) : super(key: key);
 
+  @override
+  State<UserDashBoard> createState() => _UserDashBoardState();
+}
+
+class _UserDashBoardState extends State<UserDashBoard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,14 +28,18 @@ class UserDashBoard extends StatelessWidget {
         children: [
           Center(
             child: Column(
-              children: const [
+              children: [
                 Text(
                   'Nna Chebe',
                   style: CustomTextStyles.nameStyle,
                 ),
                 SizedBox(height: 10),
+                // Text(
+                //   'USER ID: BBV000234',
+                //   style: CustomTextStyles.accountIdStyle,
+                // )
                 Text(
-                  'USER ID: BBV000234',
+                  '${widget.user?.email}',
                   style: CustomTextStyles.accountIdStyle,
                 )
               ],
@@ -40,10 +55,15 @@ class UserDashBoard extends StatelessWidget {
                 'Account',
                 style: CustomTextStyles.dashboardGenericStyle,
               ),
-              Text(
-                'LogOut',
-                style: CustomTextStyles.dashboardGenericStyle
-                    .copyWith(color: CustomColors.customRed),
+              GestureDetector(
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                },
+                child: Text(
+                  'LogOut',
+                  style: CustomTextStyles.dashboardGenericStyle
+                      .copyWith(color: CustomColors.customRed),
+                ),
               )
             ],
           ),

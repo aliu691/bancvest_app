@@ -5,7 +5,9 @@ import 'package:bancvest_app/screens/home/home_screen.dart';
 import 'package:bancvest_app/screens/login_signup/signup.dart';
 import 'package:bancvest_app/widgets/common/custom_button.dart';
 import 'package:bancvest_app/widgets/common/custom_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 final emailController = TextEditingController();
 final passwordController = TextEditingController();
@@ -64,12 +66,14 @@ class LoginScreen extends StatelessWidget {
                   ),
                   CustomButton(
                     action: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomePage(),
-                        ),
-                      );
+                      signin(
+                          emailController.text.trim(), passwordController.text);
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const HomePage(),
+                      //   ),
+                      // );
                     },
                     label: 'Login',
                     width: 370,
@@ -121,5 +125,26 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+signin(email, password) async {
+  if (formKey.currentState!.validate()) {
+    try {
+      final credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        Fluttertoast.showToast(
+            msg: 'No user found for that email.',
+            backgroundColor: CustomColors.customRed);
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        Fluttertoast.showToast(
+            msg: 'Wrong password provided for that user.',
+            backgroundColor: CustomColors.customRed);
+        print('Wrong password provided for that user.');
+      }
+    }
   }
 }

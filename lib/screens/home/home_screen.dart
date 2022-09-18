@@ -1,6 +1,7 @@
 import 'package:bancvest_app/constants/colors.dart';
 import 'package:bancvest_app/constants/text_style.dart';
 import 'package:bancvest_app/widgets/dashboard.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,6 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +41,9 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: const UserDashBoard(),
+      body: UserDashBoard(
+        user: user,
+      ),
     );
   }
 }

@@ -1,8 +1,12 @@
+import 'package:bancvest_app/models/environments.dart';
 import 'package:bancvest_app/screens/login_signup/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
+  await dotenv.load(fileName: Environment.fileName);
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());

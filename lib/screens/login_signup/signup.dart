@@ -4,7 +4,9 @@ import 'package:bancvest_app/helpers/input_validators.dart';
 import 'package:bancvest_app/screens/home/home_screen.dart';
 import 'package:bancvest_app/widgets/common/custom_button.dart';
 import 'package:bancvest_app/widgets/common/custom_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 final firstNameController = TextEditingController();
 final lastNameController = TextEditingController();
@@ -42,22 +44,22 @@ class SignUpScreen extends StatelessWidget {
               key: formKey,
               child: Column(
                 children: [
-                  CustomTextField(
-                    obscureText: false,
-                    validator: InputValidator.nameValidator,
-                    hintText: 'First Name',
-                    onSaved: (value) {},
-                    isPassword: false,
-                    textController: firstNameController,
-                  ),
-                  CustomTextField(
-                    obscureText: false,
-                    validator: InputValidator.nameValidator,
-                    hintText: 'Last Name',
-                    onSaved: (value) {},
-                    isPassword: false,
-                    textController: lastNameController,
-                  ),
+                  // CustomTextField(
+                  //   obscureText: false,
+                  //   validator: InputValidator.nameValidator,
+                  //   hintText: 'First Name',
+                  //   onSaved: (value) {},
+                  //   isPassword: false,
+                  //   textController: firstNameController,
+                  // ),
+                  // CustomTextField(
+                  //   obscureText: false,
+                  //   validator: InputValidator.nameValidator,
+                  //   hintText: 'Last Name',
+                  //   onSaved: (value) {},
+                  //   isPassword: false,
+                  //   textController: lastNameController,
+                  // ),
                   CustomTextField(
                     obscureText: false,
                     validator: InputValidator.emailValidator,
@@ -79,6 +81,7 @@ class SignUpScreen extends StatelessWidget {
                     validator: (value) {
                       InputValidator.confirmPasswordValidator(
                           value, passwordController.text);
+                      return null;
                     },
                     hintText: 'Confirm Password',
                     onSaved: (value) {},
@@ -96,12 +99,8 @@ class SignUpScreen extends StatelessWidget {
                           .copyWith(
                               color: CustomColors.textWhite, fontSize: 20),
                       action: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const HomePage(),
-                          ),
-                        );
+                        signup(emailController.text.trim(),
+                            passwordController.text, context);
                       })
                 ],
               ),
@@ -110,5 +109,37 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+signup(email, password, BuildContext context) async {
+  if (formKey.currentState!.validate()) {
+    try {
+      final credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      if (credential != null) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+            (route) => false);
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        Fluttertoast.showToast(
+            msg: 'The password provided is too weak.',
+            backgroundColor: CustomColors.customRed);
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        Fluttertoast.showToast(
+            msg: 'The account already exists for that email.',
+            backgroundColor: CustomColors.customRed);
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 }

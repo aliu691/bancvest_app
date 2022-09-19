@@ -2,6 +2,7 @@ import 'package:bancvest_app/constants/colors.dart';
 import 'package:bancvest_app/constants/text_style.dart';
 import 'package:bancvest_app/helpers/input_validators.dart';
 import 'package:bancvest_app/screens/home/home_screen.dart';
+import 'package:bancvest_app/screens/login_signup/forgot_password_screen.dart';
 import 'package:bancvest_app/screens/login_signup/signup.dart';
 import 'package:bancvest_app/widgets/common/custom_button.dart';
 import 'package:bancvest_app/widgets/common/custom_text_field.dart';
@@ -68,12 +69,6 @@ class LoginScreen extends StatelessWidget {
                     action: () {
                       signin(
                           emailController.text.trim(), passwordController.text);
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => const HomePage(),
-                      //   ),
-                      // );
                     },
                     label: 'Login',
                     width: 370,
@@ -86,10 +81,20 @@ class LoginScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {},
-                    child: Text(
-                      'Forgot Password?',
-                      style: CustomTextStyles.dashboardGenericStyle
-                          .copyWith(color: CustomColors.customGreen),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const ForgotPasswordScreen()),
+                        );
+                      },
+                      child: Text(
+                        'Forgot Password?',
+                        style: CustomTextStyles.dashboardGenericStyle
+                            .copyWith(color: CustomColors.customGreen),
+                      ),
                     ),
                   ),
                   const SizedBox(
